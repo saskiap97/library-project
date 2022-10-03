@@ -1,0 +1,13 @@
+{{!-- each needs to iterate through the values stored in the property 'books' -- look at line 10 in book.routes --}}
+{{#each books}}
+ <section class="book-summary">
+
+        <h2>{{this.title}}</h2>
+        <p>
+            Author: {{this.author}} <br />
+            Rating: {{this.rating}} <br />
+            <a href="">More details</a>
+        </p>
+
+    </section>
+{{/each}}
