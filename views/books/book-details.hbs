@@ -1,11 +1,19 @@
-<h2> Name of book: {{title}} </h2>
-<br>
-<h4> Author: {{author}} </h4>
-<br>
-<h5> Rating: {{rating}} </h5>
-<br>
-{{description}}
+<section class="book-details">
+    <h2>{{title}}</h2>
 
+    <p>
+        <strong>Author:</strong> <br />
+        {{author.name}} <br />
+        {{author.age}} <br />
+        {{author.country}} <br />
+    </p>
+    <p>
+        <strong>Rating: </strong> {{rating}} <br />
+    </p>
+    <p>
+        <strong>Description:</strong>
+        {{description}}
+    </p>
 <br>
 <a href="/books"> Back </a>
 <br>

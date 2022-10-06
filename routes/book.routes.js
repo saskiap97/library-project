@@ -1,11 +1,13 @@
 const Book = require("../models/Book.model");
+const Author = require("../models/Author.model");
 
 const router = require("express").Router();
 
 
 router.get("/books", (req, res, next) => {
   //whenever anyone goes here we want to send a query to the database so we do ...
-  Book.find() //this will return a promise, if it's successful we'll receive the list of books and then we'll console log it!
+  Book.find()
+  .populate('author') //this will return a promise, if it's successful we'll receive the list of books and then we'll console log it!
   .then(booksfromDB => {
     //res.render needs to go through an object, which stores the values of our found books
     res.render("books/books-list", {books: booksfromDB})
@@ -21,6 +23,7 @@ router.get("/books/:bookId", (req, res, next) => {
     console.log(req.params);
   
     Book.findById(id)
+    .populate('author')
       .then( bookDetails => {
         res.render("books/book-details", bookDetails)
       } )
@@ -32,9 +35,17 @@ router.get("/books/:bookId", (req, res, next) => {
 
 //Create a route to display a form
 
-router.get("/books/create", (req, res, next)=> {
-res.render('books/book-create')
+router.get("/books/create", (req, res, next) => {
+  Author.find()
+    .then( (authorsFromDB) => {
+      res.render("books/book-create", {authorsArr: authorsFromDB});
+    })
+    .catch(err => {
+      console.log("error getting authors from DB", err);
+      next(err);
+    })
 })
+
 
 //Create a route to process form info 
 
@@ -46,7 +57,7 @@ router.post("/books/create", (req, res, next) => {
       author: req.body.author,
       rating: req.body.rating,
     }
-  
+
     Book.create(bookDetails)
       .then(bookDetails => {
         res.redirect("/books")
@@ -59,7 +70,7 @@ router.post("/books/create", (req, res, next) => {
   })
   
 
-  //UPDATE: display form
+
 //UPDATE: display form
 router.get("/books/:bookId/edit", (req, res, next) => {
     Book.findById(req.params.bookId)

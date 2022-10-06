@@ -4,9 +4,10 @@
 
         <h2>{{this.title}}</h2>
         <p>
-            Author: {{this.author}} <br />
+            Author: {{this.author.name}}, from {{this.author.country}}<br />
             Rating: {{this.rating}} <br />
             <a href="/books/{{id}}">More details</a>
+            <a href="/books/{{_id}}/edit">Edit</a>
         </p>
 
     </section>
