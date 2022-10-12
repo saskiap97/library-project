@@ -1,5 +1,6 @@
 const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
 const router = require("express").Router();
 
@@ -12,7 +13,7 @@ Author.find()
 
 
 //CREATE: display form
-router.get("/authors/create", (req, res, next) => {
+router.get("/authors/create", isLoggedIn,(req, res, next) => {
     res.render('authors/author-create');
   });
   

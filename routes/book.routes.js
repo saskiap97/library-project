@@ -1,8 +1,7 @@
 const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
-
+const isLoggedIn = require("../middleware/isLoggedIn");
 const router = require("express").Router();
-
 
 router.get("/books", (req, res, next) => {
   //whenever anyone goes here we want to send a query to the database so we do ...
@@ -35,7 +34,7 @@ router.get("/books/:bookId", (req, res, next) => {
 
 //Create a route to display a form
 
-router.get("/books/create", (req, res, next) => {
+router.get("/books/create", isLoggedIn, (req, res, next) => {
   Author.find()
     .then( (authorsFromDB) => {
       res.render("books/book-create", {authorsArr: authorsFromDB});
@@ -49,7 +48,7 @@ router.get("/books/create", (req, res, next) => {
 
 //Create a route to process form info 
 
-router.post("/books/create", (req, res, next) => {
+router.post("/books/create", isLoggedIn, (req, res, next) => {
   
     const bookDetails = {
       title: req.body.title,

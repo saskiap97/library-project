@@ -4,9 +4,13 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  color: #0c739c;
 }
 
 h1 {
   color: 15px;
+}
+
+header{
+  background-color: rgb(189, 229, 189);
 }

@@ -10,7 +10,34 @@
    </head>
 
    <body>
+      <header>
+<a href="/books"> All books </a>
+<br>
+<a href="/books/create"> Add a new book </a>
+<br>
+<a href="/authors"> Authors </a>
+<br>
+<a href="/authors/create"> Add an author </a>
+<br>
+<a href="/signup">Register</a> 
+<br>
+<a href="/login">Login to your account</a> 
+<br>
+<a href="/user-profile">Profile Page</a> 
 
+{{#if userInSession}}
+<p> User is logged in </p>
+<form id="logout-form" action="/logout" method="POST">
+        <button>Logout</button>
+    </form>
+
+    {{else}}
+    <p> User is not logged in </p>
+    <a href="/login">Login</a>
+    <a href="/signup">Register</a>
+   {{/if}}
+
+    </header>
       {{{body}}}
 
       <script src="/js/script.js"></script>
